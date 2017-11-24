@@ -6,6 +6,8 @@ import random
 import time
 import matplotlib.pyplot as plt
 
+np.set_printoptions(threshold=np.nan)
+
 length = int(sys.argv[1])
 max_time = int(sys.argv[2])
 density = float(sys.argv[3])
