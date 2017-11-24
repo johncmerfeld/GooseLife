@@ -1,3 +1,4 @@
+# B36/S23 implementation
 
 import numpy as np
 import sys
@@ -19,6 +20,13 @@ for i in range(length):
 	for j in range(length):
 			if np.random.random_sample() <= density:
 				lattice[i][j] = 1
+
+# r pentanimo
+#lattice[1][2] = 1
+#lattice[1][3] = 1
+#lattice[2][1] = 1
+#lattice[2][2] = 1
+#lattice[3][2] = 1
 
 print lattice
 
@@ -58,6 +66,9 @@ for t in xrange(max_time):
 				status_lattice[i][j] = 1
 			# reproduction
 			if sum_neighbors(lattice,i,j) == 3:
+				status_lattice[i][j] = 1
+			# highlife
+			if sum_neighbors(lattice,i,j) == 6 and lattice[i][j] == 0:
 				status_lattice[i][j] = 1
 
 	# update lattice according to status
