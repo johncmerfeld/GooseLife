@@ -1,10 +1,8 @@
 
 import numpy as np
 import sys
-import math
 import random
 import time
-import matplotlib.pyplot as plt
 
 np.set_printoptions(threshold=np.nan)
 
