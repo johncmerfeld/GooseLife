@@ -8,27 +8,15 @@ import matplotlib.pyplot as plt
 
 length = int(sys.argv[1])
 max_time = int(sys.argv[2])
+density = float(sys.argv[3])
+speed = float(sys.argv[4])
 
 lattice = np.zeros((length, length), dtype = int)
 
 for i in range(length):
 	for j in range(length):
-			if np.random.random_sample() >= .5:
+			if np.random.random_sample() <= density:
 				lattice[i][j] = 1
-
-#lattice[1][2] = 1
-#lattice[1][5] = 1
-#lattice[2][6] = 1
-#lattice[3][2] = 1
-#lattice[3][6] = 1
-#lattice[4][3] = 1
-#lattice[4][4] = 1
-#lattice[4][5] = 1
-#lattice[4][6] = 1
-#lattice[6][5] = 1
-#lattice[6][6] = 1
-#lattice[5][4] = 1
-#lattice[5][7] = 1
 
 print lattice
 
@@ -75,6 +63,6 @@ for t in xrange(max_time):
 		for j in xrange(length):
 			lattice[i][j] = status_lattice[i][j]
 
-	time.sleep(0.5)
+	time.sleep(speed)
 
 	print lattice
