@@ -1,35 +1,46 @@
-
+import matplotlib as mpl
+from matplotlib import pyplot as plt
+from matplotlib import animation as anim
 import numpy as np
 import sys
 import math
 import random
 import time
 
-
 np.set_printoptions(threshold=np.nan)
 
 length = int(sys.argv[1])
-max_time = int(sys.argv[2])
-density = float(sys.argv[3])
-speed = float(sys.argv[4])
+density = float(sys.argv[2])
 
-lattice = np.zeros((length, length), dtype = int)
-
+fig = plt.figure()
+ax = plt.axes(xlim=(0, length-1), ylim=(0, length-1))
+arr = np.zeros((length, length), dtype = int)
 for i in range(length):
 	for j in range(length):
 			if np.random.random_sample() <= density:
-				lattice[i][j] = 1
+				arr[i][j] = 100
+
+cmap = mpl.colors.LinearSegmentedColormap.from_list('my_colormap',
+                                                    ['black','lightgreen'],
+                                                    256)
+bounds=[0,0,10,10]
+norm = mpl.colors.BoundaryNorm(bounds, cmap.N)
+
+im = plt.imshow(arr, interpolation='nearest',
+              cmap = cmap,
+              origin = 'lower',
+			  vmin = 0, vmax = 255,
+			  animated= True)
 
 # r pentanimo
-"""lattice[1][2] = 1
-lattice[1][3] = 1
-lattice[2][1] = 1
-lattice[2][2] = 1
-lattice[3][2] = 1"""
+"""arr[1][2] = 1
+arr[1][3] = 1
+arr[2][1] = 1
+arr[2][2] = 1
+arr[3][2] = 1"""
 
-print lattice
+def sum_neighbors(arr, i, j):
 
-def sum_neighbors(lattice, i, j):
 	left = j - 1
 	right = j + 1
 	below = i + 1
@@ -44,34 +55,41 @@ def sum_neighbors(lattice, i, j):
 	if above < 0:
 		above = length - 1
 
-	the_sum = 	lattice[below][right] + lattice[i][right] + lattice[above][right] + lattice[below][j] + lattice[below][left] + lattice[i][left] + lattice[above][j] + lattice[above][left]
+	the_sum = arr[below][right] + arr[i][right] + arr[above][right] + arr[below][j] + arr[below][left] + arr[i][left] + arr[above][j] + arr[above][left]
 	return the_sum
 
 # Conway rules
 
-for t in xrange(max_time):
-	status_lattice = np.zeros((length, length), dtype = int)
+def update(arr):
+	status_arr = np.zeros((length, length), dtype = int)
 
-	for i in xrange(length):
-		for j in xrange(length):
+	for i in range(length):
+		for j in range(length):
 			# underpopulation
-			if sum_neighbors(lattice,i,j) < 2:
-				status_lattice[i][j] = 0
+			if sum_neighbors(arr,i,j) < 200:
+				status_arr[i][j] = 0
 			# overpopulation
-			if sum_neighbors(lattice,i,j) > 3:
-				status_lattice[i][j] = 0
+			if sum_neighbors(arr,i,j) > 300:
+				status_arr[i][j] = 0
 			# cohabitation
-			if sum_neighbors(lattice,i,j) == 2 and lattice[i][j] == 1:
-				status_lattice[i][j] = 1
+			if sum_neighbors(arr,i,j) == 200 and arr[i][j] == 100:
+				status_arr[i][j] = 100
 			# reproduction
-			if sum_neighbors(lattice,i,j) == 3:
-				status_lattice[i][j] = 1
+			if sum_neighbors(arr,i,j) == 300:
+				status_arr[i][j] = 100
 
-	# update lattice according to status
-	for i in xrange(length):
-		for j in xrange(length):
-			lattice[i][j] = status_lattice[i][j]
+	# update arr according to status
+	for i in range(length):
+		for j in range(length):
+			arr[i][j] = status_arr[i][j]
 
-	time.sleep(speed)
+	return arr
 
-	print lattice
+def animate(i):
+    arr=im.get_array()
+    arr = update(arr)
+    im.set_array(arr)
+    return [im]
+
+anim = anim.FuncAnimation(fig, animate, frames=10, interval=1, blit=True)
+plt.show()
