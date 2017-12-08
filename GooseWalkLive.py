@@ -8,6 +8,7 @@ import random
 
 length = int(sys.argv[1])
 boundaries_are_continuous = bool(sys.argv[2])
+brightness = int(sys.argv[3])
 
 fig = plt.figure()
 ax = plt.axes(xlim=(0, length-1), ylim=(0, length-1))
@@ -72,7 +73,7 @@ def walk_d():
 
 def stand(arr):
     global x,y
-    arr[x][y] += 10
+    arr[x][y] += brightness
     return arr
 
 def animate(i):
