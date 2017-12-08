@@ -63,7 +63,7 @@ else: # discrete
 cmap2 = mpl.colors.LinearSegmentedColormap.from_list('my_colormap',
                                            ['black','green','white'],
                                            256)
-bounds=[-6,-2,2,6]
+bounds=[0,0,10,10]
 norm = mpl.colors.BoundaryNorm(bounds, cmap2.N)
 
 # tell imshow about color map so that only set colors are used
