@@ -1,4 +1,4 @@
-# The GooseLife suit and its many spinoff series!
+# The GooseLife suite and its many spinoff series!
 
 ## GooseLife
 A suite of cellular automata based on Conway's Game of Life
