@@ -12,7 +12,7 @@ e.g. python GooseLifeStandard.py 30 0.3
 A suite of random walk image creators 
 
 ### To run:
-python ```variant_name``` ```grid_size``` ```boundaries_are_continuous``` ```[brightness]``` (Live only)
+python ```variant_name``` ```grid_size``` ```number_of_steps``` ```boundaries_are_continuous``` ```[brightness]``` (Live only)
 
-e.g. python GooseWalkLive.py 50 1 30
+e.g. python GooseWalkLive.py 50 30 1
 

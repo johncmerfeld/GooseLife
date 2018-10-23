@@ -72,8 +72,6 @@ img2 = pyplot.imshow(zvals,interpolation='nearest',
                     origin='lower')
 
 # make a color bar
-pyplot.colorbar(img2,cmap=cmap2,
-                norm=norm,boundaries=bounds,ticks=[-5,0,5])
 
 pyplot.colorbar(img2,cmap=cmap2)
 pyplot.show()

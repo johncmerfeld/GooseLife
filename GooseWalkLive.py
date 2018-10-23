@@ -15,7 +15,7 @@ ax = plt.axes(xlim=(0, length-1), ylim=(0, length-1))
 arr = np.zeros((length, length), dtype = int)
 
 cmap = mpl.colors.LinearSegmentedColormap.from_list('my_colormap',
-                                                    ['black','green','white'],
+                                                    ['black','darkgreen','green','lightgreen','lightblue','white'],
                                                     256)
 bounds=[0,0,10,10]
 norm = mpl.colors.BoundaryNorm(bounds, cmap.N)
