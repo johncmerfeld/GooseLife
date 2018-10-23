@@ -1,15 +1,12 @@
 import matplotlib as mpl
 from matplotlib import pyplot
-from matplotlib import animation as anim
 import numpy as np
 import sys
-import random
-import time
 
 # make values from -5 to 5, for this example
-length = int(sys.argv[1])
-lifespan = int(sys.argv[2])
-boundaries_are_continuous = int(sys.argv[3])
+length = 100
+lifespan = 100
+boundaries_are_continuous = 1
 zvals = np.zeros((length, length), dtype = int)
 
 x = int(np.random.random_sample() * length)
@@ -75,3 +72,4 @@ img2 = pyplot.imshow(zvals,interpolation='nearest',
 
 pyplot.colorbar(img2,cmap=cmap2)
 pyplot.show()
+pyplot.savefig('goosewalk.png')

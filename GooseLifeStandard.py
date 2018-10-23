@@ -3,9 +3,6 @@ from matplotlib import pyplot as plt
 from matplotlib import animation as anim
 import numpy as np
 import sys
-import math
-import random
-import time
 
 np.set_printoptions(threshold=np.nan)
 
